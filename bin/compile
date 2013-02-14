@@ -41,11 +41,12 @@ else
 
   echo "-----> Compiling"
   make 2>&1 1>/dev/null | indent
+
+  cd $BUILD_DIR/src
+  echo "-----> Installing"
+  make install 2>&1 1>/dev/null | indent
 fi
 
-cd $BUILD_DIR/src
-echo "-----> Installing"
-make install 2>&1 1>/dev/null | indent
 
 echo "-----> Moving build artifacts to cache"
 rm -rf $CACHE_DIR/src $CACHE_DIR/VERSION

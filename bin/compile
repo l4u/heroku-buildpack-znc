@@ -18,9 +18,9 @@ release="znc-$version"
 tgz="$release.tar.gz"
 download="http://znc.in/releases/$tgz"
 
-if [ -f $CACHE_DIR/VERSION ]; then
-  cache_version="$(cat $CACHE_DIR/VERSION)"
-fi
+#if [ -f $CACHE_DIR/VERSION ]; then
+#  cache_version="$(cat $CACHE_DIR/VERSION)"
+#fi
 if [ "$version" = "$cache_version" ]; then
   echo "-----> Version unchanged, using cache"
   mv $CACHE_DIR/src $BUILD_DIR/src
@@ -42,11 +42,11 @@ else
   echo "-----> Compiling"
   make 2>&1 1>/dev/null | indent
 
-  cd $BUILD_DIR/src
-  echo "-----> Installing"
-  make install 2>&1 1>/dev/null | indent
 fi
 
+cd $BUILD_DIR/src
+echo "-----> Installing"
+make install 2>&1 1>/dev/null | indent
 
 echo "-----> Moving build artifacts to cache"
 rm -rf $CACHE_DIR/src $CACHE_DIR/VERSION
